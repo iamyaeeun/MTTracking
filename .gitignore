@@ -1,0 +1,13 @@
+build
+CMakeLists.txt.user*
+CMakeFiles
+CMakeCache.txt
+build
+CMakeFiles
+*.engine
+*.vcxproj
+*.vcxproj.filters
+*.weights
+*.onnx
+*.mp4
+

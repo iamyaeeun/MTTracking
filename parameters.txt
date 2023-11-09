@@ -1,0 +1,49 @@
+Number of example:           -e=0 or --example=1
+
+0 - MouseTracking, 
+1 - MotionDetector, 
+2 - FaceDetector, 
+3 - PedestrianDetector, 
+4 - OpenCV dnn objects detector, 
+5 - Yolo Darknet detector, 
+6 - YOLO TensorRT Detector
+7 - Cars counting
+
+-inf option: darknet/tensorrt/ocvdnn
+-geo_bind="..\data\settings.ini"    // in order to draw line to detect speed we need to add this file. but it seems to be missed
+
+# General usage with geo map
+..\data\Relaxing_highway_traffic.mp4 -e=7 -w="..\data\yolov3.weights" -c="..\data\yolov3.cfg" -n="..\data\coco.names" -inf=darknet -gb="..\data\map\geo_bind.ini"
+..\data\Relaxing_highway_traffic.mp4 -e=7 -w="..\data\yolov4.weights" -c="..\data\yolov4.cfg" -n="..\data\coco.names" -inf=tensorrt -gb="..\data\map\geo_bind.ini"
+
+# Without geo map you can see only bbox
+..\data\Relaxing_highway_traffic.mp4 -e=7 -w="..\data\yolov3.weights" -c="..\data\yolov3.cfg" -n="..\data\coco.names"
+..\data\Relaxing_highway_traffic.mp4 -e=7 -w="..\data\yolov4.weights" -c="..\data\yolov4.cfg" -n="..\data\coco.names"
+
+# rtsp: added a paramter, -rt
+rtsp://root:root@192.168.1.27/mpeg4/media.amp -e=7 -w="..\..\data\yolov4.weights" -c="..\..\data\yolov4.cfg" -n="..\..\data\coco.names" -inf=tensorrt -gb="..\..\data\map\geo_bind_lkh.ini" -rt=1
+rtsp://192.168.1.38:8554/test -e=7 -w="..\..\data\yolov4.weights" -c="..\..\data\yolov4.cfg" -n="..\..\data\coco.names" -inf=tensorrt -gb="..\..\data\map\geo_bind_lkh.ini" -rt=1
+
+# ONNX model: added a parameter, nx
+# don't need to set weights file. Just need onnx model file.
+..\..\data\Relaxing_highway_traffic.mp4 -e=7 -w="..\..\data\dummy.weights" -c="..\..\data\yolov7_480x640.onnx" -n="..\..\data\coco.names" -inf=tensorrt -gb="..\..\data\map\geo_bind_lkh.ini" -nx=1
+
+# Most useful examples:
+- yolov4 tensorrt
+..\..\data\Relaxing_highway_traffic.mp4 -e=7 -w="..\..\data\yolov4.weights" -c="..\..\data\yolov4.cfg" -n="..\..\data\coco.names" -inf=tensorrt -gb="..\..\data\map\geo_bind_lkh.ini"
+- yolov4 tensorrt rtsp
+rtsp://192.168.1.38:8554/test -e=7 -w="..\..\data\yolov4.weights" -c="..\..\data\yolov4.cfg" -n="..\..\data\coco.names" -inf=tensorrt -gb="..\..\data\map\geo_bind_lkh.ini" -rt=1
+- yolov7 tensorrt
+..\..\data\Relaxing_highway_traffic.mp4 -e=7 -w="..\..\data\dummy.weights" -c="..\..\data\yolov7_360x640.onnx" -n="..\..\data\coco.names" -inf=tensorrt -gb="..\..\data\map\geo_bind_lkh.ini" -nx=1
+
+
+# Extra
+..\data\smuglanka.mp4 -e=2 -a=0
+
+
+Automatically created when I uses yolov4
+..\data\yolov4-kFLOAT-batch1.engine
+
+Video source and model files:
+https://drive.google.com/drive/folders/1u6srfdbw9PStfp28ivy9czXl8RDloEzx?usp=sharing
+
